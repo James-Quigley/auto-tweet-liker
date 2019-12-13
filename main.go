@@ -50,18 +50,21 @@ func main() {
 
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Println("Error loading .env file")
 	}
-	log.Println("Successfully loaded environment variables")
 
 	TwitterConsumerAPIKey := os.Getenv("TWITTER_CONSUMER_API_KEY")
-	TwitterConsumerASecret := os.Getenv("TWITTER_CONSUMER_API_SECRET")
+	TwitterConsumerAPISecret := os.Getenv("TWITTER_CONSUMER_API_SECRET")
 	TwitterAccessToken := os.Getenv("TWITTER_ACCESS_TOKEN")
 	TwitterAccessTokenSecret := os.Getenv("TWITTER_ACCESS_TOKEN_SECRET")
 
+	if TwitterConsumerAPIKey == "" || TwitterConsumerAPISecret == "" || TwitterAccessToken == "" || TwitterAccessTokenSecret == "" {
+		log.Fatal("Missing necessary environment variables")
+	}
+	log.Println("Successfully loaded environment variables")
 	accountID := os.Getenv("TWITTER_ACCOUNT_ID")
 
-	config := oauth1.NewConfig(TwitterConsumerAPIKey, TwitterConsumerASecret)
+	config := oauth1.NewConfig(TwitterConsumerAPIKey, TwitterConsumerAPISecret)
 	token := oauth1.NewToken(TwitterAccessToken, TwitterAccessTokenSecret)
 	httpClient := config.Client(oauth1.NoContext, token)
 
