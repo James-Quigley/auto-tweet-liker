@@ -12,10 +12,12 @@ RUN echo "nobody:x:65534:65534:Nobody:/:" > /etc_passwd
 
 FROM alpine
 
+WORKDIR /workspace
+
 COPY --from=0 /workspace /workspace
 COPY --from=0 /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=0 /etc_passwd /etc/passwd
 
 USER nobody
 
-CMD [ "/workspace/auto-tweet-liker" ]
+CMD [ "./auto-tweet-liker" ]
