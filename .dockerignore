@@ -1,0 +1,5 @@
+.env
+.vscode
+.github
+.gitignore
+deployment.yaml

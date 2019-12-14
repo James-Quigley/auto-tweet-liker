@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: auto-tweet-liker
+spec:
+  containers:
+    - name: auto-tweet-liker
+      image: jamesquigley/auto-tweet-liker
+      imagePullPolicy: Always
+      volumeMounts:
+        - name: auto-tweet-liker-secrets
+          mountPath: /app/.env
+          subPath: .env
+  volumes:
+    - name: auto-tweet-liker-secrets
+      secret:
+        secretName: auto-tweet-liker-secrets

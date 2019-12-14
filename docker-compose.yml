@@ -1,0 +1,6 @@
+version: "3"
+services:
+  auto-tweet-liker:
+    build: .
+    volumes:
+      - ./.env:/app/.env
