@@ -58,8 +58,14 @@ func main() {
 	TwitterAccessToken := os.Getenv("TWITTER_ACCESS_TOKEN")
 	TwitterAccessTokenSecret := os.Getenv("TWITTER_ACCESS_TOKEN_SECRET")
 
-	if TwitterConsumerAPIKey == "" || TwitterConsumerAPISecret == "" || TwitterAccessToken == "" || TwitterAccessTokenSecret == "" {
-		log.Fatal("Missing necessary environment variables")
+	envArr := []string{TwitterConsumerAPIKey, TwitterConsumerAPISecret, TwitterAccessToken, TwitterAccessTokenSecret}
+	envNamesArr := []string{"TWITTER_CONSUMER_API_KEY", "TWITTER_CONSUMER_API_SECRET", "TWITTER_ACCESS_TOKEN", "TWITTER_ACCESS_TOKEN_SECRET"}
+
+	log.Println("Validating environment variables...")
+	for i, env := range envArr {
+		if env == "" {
+			log.Fatalf("Missing environment variable: %s", envNamesArr[i])
+		}
 	}
 	log.Println("Successfully loaded environment variables")
 	accountID := os.Getenv("TWITTER_ACCOUNT_ID")
